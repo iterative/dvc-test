@@ -75,12 +75,12 @@ matrix:
 #        - DVC_TEST_DISTRO=fedora
 #        - DVC_TEST_DISTRO_VERSION=26
 #        - DVC_TEST_PKG=rpm
-#    - name: "pip on MacOS"
-#      os: osx
-#      env:
-#        - DVC_TEST_OS=posix
-#        - DVC_TEST_SYSTEM=osx
-#        - DVC_TEST_PKG=pip
+  - name: "pip on MacOS"
+    os: osx
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pip
 #    - name: "pkg on MacOS"
 #      os: osx
 #      env:
