@@ -4,13 +4,13 @@ services:
   - docker
 matrix:
   include:
-    - name: "pip on Ubuntu 18.04"
-      env:
-        - DVC_TEST_OS=posix
-        - DVC_TEST_SYSTEM=linux
-        - DVC_TEST_DISTRO=ubuntu
-        - DVC_TEST_DISTRO_VERSION=18.04
-        - DVC_TEST_PKG=pip
+  - name: "pip on Ubuntu 18.04"
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=linux
+      - DVC_TEST_DISTRO=ubuntu
+      - DVC_TEST_DISTRO_VERSION=18.04
+      - DVC_TEST_PKG=pip
 #    - name: "deb on Ubuntu 18.04"
 #      env:
 #        - DVC_TEST_OS=posix
@@ -18,13 +18,13 @@ matrix:
 #        - DVC_TEST_DISTRO=ubuntu
 #        - DVC_TEST_DISTRO_VERSION=18.04
 #        - DVC_TEST_PKG=deb
-    - name: "pip on Ubuntu 16.04"
-      env:
-        - DVC_TEST_OS=posix
-        - DVC_TEST_SYSTEM=linux
-        - DVC_TEST_DISTRO=ubuntu
-        - DVC_TEST_DISTRO_VERSION=16.04
-        - DVC_TEST_PKG=pip
+  - name: "pip on Ubuntu 16.04"
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=linux
+      - DVC_TEST_DISTRO=ubuntu
+      - DVC_TEST_DISTRO_VERSION=16.04
+      - DVC_TEST_PKG=pip
 #    - name: "deb on Ubuntu 16.04"
 #      env:
 #        - DVC_TEST_OS=posix
@@ -33,13 +33,13 @@ matrix:
 #        - DVC_TEST_DISTRO_VERSION=16.04
 #        - DVC_TEST_PKG=deb
   
-   - name: "pip on Fedora 28"
-      env:
-        - DVC_TEST_OS=posix
-        - DVC_TEST_SYSTEM=linux
-        - DVC_TEST_DISTRO=fedora
-        - DVC_TEST_DISTRO_VERSION=28
-        - DVC_TEST_PKG=pip
+  - name: "pip on Fedora 28"
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=linux
+      - DVC_TEST_DISTRO=fedora
+      - DVC_TEST_DISTRO_VERSION=28
+      - DVC_TEST_PKG=pip
 #    - name: "rpm on Fedora 28"
 #      env:
 #        - DVC_TEST_OS=posix
@@ -47,13 +47,13 @@ matrix:
 #        - DVC_TEST_DISTRO=fedora
 #        - DVC_TEST_DISTRO_VERSION=28
 #        - DVC_TEST_PKG=rpm
-   - name: "pip on Fedora 27"
-      env:
-        - DVC_TEST_OS=posix
-        - DVC_TEST_SYSTEM=linux
-        - DVC_TEST_DISTRO=fedora
-        - DVC_TEST_DISTRO_VERSION=27
-        - DVC_TEST_PKG=pip
+  - name: "pip on Fedora 27"
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=linux
+      - DVC_TEST_DISTRO=fedora
+      - DVC_TEST_DISTRO_VERSION=27
+      - DVC_TEST_PKG=pip
 #    - name: "rpm on Fedora 27"
 #      env:
 #        - DVC_TEST_OS=posix
@@ -61,13 +61,13 @@ matrix:
 #        - DVC_TEST_DISTRO=fedora
 #        - DVC_TEST_DISTRO_VERSION=27
 #        - DVC_TEST_PKG=rpm
-    - name: "pip on Fedora 26"
-      env:
-        - DVC_TEST_OS=posix
-        - DVC_TEST_SYSTEM=linux
-        - DVC_TEST_DISTRO=fedora
-        - DVC_TEST_DISTRO_VERSION=26
-        - DVC_TEST_PKG=pip
+  - name: "pip on Fedora 26"
+    env:
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=linux
+      - DVC_TEST_DISTRO=fedora
+      - DVC_TEST_DISTRO_VERSION=26
+      - DVC_TEST_PKG=pip
 #    - name: "rpm on Fedora 26"
 #      env:
 #        - DVC_TEST_OS=posix
