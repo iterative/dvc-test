@@ -7,7 +7,7 @@ try:
 except:
     from pip._internal import main as pipmain
 
-def main(argv):
+def main(argv=None):
     ret = os.system("pip install -r requirements.txt")
     assert ret == 0
 
