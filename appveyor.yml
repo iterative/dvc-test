@@ -6,12 +6,12 @@ platform: x86
 
 environment:
   matrix:
-    - DVC_TEST_OS=windows
-      DVC_TEST_SYSTEM=windows
-      DVC_TEST_PKG=pip
-    - DVC_TEST_OS=windows
-      DVC_TEST_SYSTEM=windows
-      DVC_TEST_PKG=exe
+    - DVC_TEST_OS: windows
+      DVC_TEST_SYSTEM: windows
+      DVC_TEST_PKG: pip
+    - DVC_TEST_OS: windows
+      DVC_TEST_SYSTEM: windows
+      DVC_TEST_PKG: exe
 
 install:
   - python -m pip install -U pip setuptools wheel
