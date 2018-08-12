@@ -11,7 +11,7 @@ except:
 URL = 'https://4ki8820rsf.execute-api.us-east-2.amazonaws.com/' \
       'prod/latest-version'
 TIMEOUT = 10
-
+RETRIES = 3
 
 def latest_version(platform, pkg):
     import requests
@@ -29,7 +29,12 @@ def install_latest_version(platform, cmd, pkg):
 
 
 def install_pip():
-    ret = pipmain(['install', 'dvc'])
+    retries = RETRIES
+    while retries > 0:
+        ret = pipmain(['install', 'dvc'])
+        if ret == 0:
+            break
+        retries -= 1
     assert ret == 0
 
 
