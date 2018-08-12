@@ -2,3 +2,4 @@ docker
 nose
 wget
 requests
+distro

@@ -34,14 +34,18 @@ def install_pip():
 
 
 def install_deb():
+    import dist
     assert platform.system() == "Linux"
-    assert platform.linux_distribution() == "Ubuntu"
+    dist = distro.linux_distribution(full_distribution_name=False)[0]
+    assert dist == "ubuntu"
     install_latest_version('dpkg -i', 'deb')
 
 
 def install_rpm():
+    import dist
     assert platform.system() == "Linux"
-    assert platform.linux_distribution() == "Fedora"
+    dist = distro.linux_distribution(full_distribution_name=False)[0]
+    assert dist == "fedora"
     install_latest_version('rpm -ivh', 'rpm')
 
 
