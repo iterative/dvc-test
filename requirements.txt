@@ -1,4 +1,3 @@
-docker
 nose
 wget
 requests

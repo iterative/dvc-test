@@ -1,6 +1,5 @@
 from __future__ import print_function
 import os
-import docker
 import platform
 
 from tests.main import main
@@ -32,27 +31,25 @@ elif test_system == 'linux':
                               "docker",
                               test_distro,
                               test_distro_version)
-    client = docker.from_env()
 
     print("Building '{}'".format(docker_dir))
-    image = client.images.build(path=docker_dir)[0]
+    ret = os.system("docker build -t dvc-test {}".format(docker_dir))
+    assert ret == 0
 
-    print("Running '{}'".format(image.id))
-    con = client.containers.run(image.id,
-                                ["python", "-m", "tests"],
-                                volumes={REPO_ROOT: {'bind': '/dvc-test',
-                                                     'mode': 'rw'}},
-                                working_dir='/dvc-test',
-                                environment={"DVC_TEST_SYSTEM": test_system,
-                                             "DVC_TEST_PKG": test_pkg},
-                                auto_remove=True,
-                                detach=True)
+    cmd = "docker run " \
+           "-v {}:/dvc-test " \
+           "-w /dvc-test " \
+           "-e DVC_TEST_SYSTEM={} " \
+           "-e DVC_TEST_PKG={} " \
+           "--rm " \
+           "-t dvc-test " \
+           "python -m tests".format(REPO_ROOT,
+                                    test_system,
+                                    test_pkg)
 
-    for out in con.logs(stream=True):
-        print(out, end='')
-
-    d = con.wait()
-    exit(d['StatusCode'])
+    print("Running 'dvc-test' image: {}".format(cmd))
+    ret = os.system(cmd)
+    exit(ret)
 elif test_system == 'osx':
     assert platform.system() == "Darwin"
     main()
