@@ -2,3 +2,4 @@ nose
 wget
 requests
 distro
+tensorflow
