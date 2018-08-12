@@ -17,7 +17,7 @@ def latest_version(platform, pkg):
     import requests
     r = requests.get(URL, timeout=TIMEOUT)
     j = r.json()
-    return j[platform][pkg]
+    return j['packages'][platform][pkg]
 
 
 def install_latest_version(platform, cmd, pkg):
