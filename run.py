@@ -51,8 +51,8 @@ elif test_system == 'linux':
     for out in con.logs(stream=True):
         print(out, end='')
 
-    con.wait()
-
+    d = con.wait()
+    exit(d['StatusCode'])
 elif test_system == 'osx':
     assert platform.system() == "Darwin"
     main()
