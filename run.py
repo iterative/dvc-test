@@ -7,6 +7,8 @@ from tests.main import main
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+RETRIES = 3
+
 test_system = os.getenv('DVC_TEST_SYSTEM', None)
 if test_system is None:
     print("Use DVC_TEST_SYSTEM to specify test system")
@@ -32,23 +34,35 @@ elif test_system == 'linux':
                               test_distro,
                               test_distro_version)
 
-    print("Building '{}'".format(docker_dir))
-    ret = os.system("docker build -t dvc-test {}".format(docker_dir))
+    retries = RETRIES
+    while retries > 0:
+        print("Building '{}'".format(docker_dir))
+        ret = os.system("docker build -t dvc-test {}".format(docker_dir))
+        if ret == 0:
+            break
+        retries -= 1
+
     assert ret == 0
 
-    cmd = "docker run " \
-           "-v {}:/dvc-test " \
-           "-w /dvc-test " \
-           "-e DVC_TEST_SYSTEM={} " \
-           "-e DVC_TEST_PKG={} " \
-           "--rm " \
-           "-t dvc-test " \
-           "python -m tests".format(REPO_ROOT,
-                                    test_system,
-                                    test_pkg)
+    retries = RETRIES
+    while retries > 0:
+        cmd = "docker run " \
+               "-v {}:/dvc-test " \
+               "-w /dvc-test " \
+               "-e DVC_TEST_SYSTEM={} " \
+               "-e DVC_TEST_PKG={} " \
+               "--rm " \
+               "-t dvc-test " \
+               "python -m tests".format(REPO_ROOT,
+                                        test_system,
+                                        test_pkg)
 
-    print("Running 'dvc-test' image: {}".format(cmd))
-    ret = os.system(cmd)
+        print("Running 'dvc-test' image: {}".format(cmd))
+        ret = os.system(cmd)
+        if ret == 0:
+            break
+        retries -= 1
+
     exit(ret)
 elif test_system == 'osx':
     assert platform.system() == "Darwin"
