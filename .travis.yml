@@ -90,6 +90,9 @@ matrix:
       - DVC_TEST_PKG=pip
   - name: "pkg on MacOS"
     os: osx
+    osx_image: xcode9.3
+    language: ruby
+    rvm: 2.4.0
     env:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
