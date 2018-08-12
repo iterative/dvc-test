@@ -38,7 +38,7 @@ def install_deb():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
-    install_latest_version('linux', 'dpkg -i', 'deb')
+    install_latest_version('linux', 'sudo dpkg -i', 'deb')
 
 
 def install_rpm():
@@ -46,12 +46,12 @@ def install_rpm():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
-    install_latest_version('linux', 'rpm -ivh', 'rpm')
+    install_latest_version('linux', 'sudo rpm -ivh', 'rpm')
 
 
 def install_pkg():
     assert platform.system() == "Darwin"
-    install_latest_version('osx', 'installer -target / -pkg', 'pkg')
+    install_latest_version('osx', 'sudo installer -target / -pkg', 'pkg')
 
 def install_exe():
     assert platform.system() == "Windows"
