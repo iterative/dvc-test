@@ -1,5 +1,4 @@
 import os
-import requests
 import platform
 from subprocess import check_call
 
@@ -15,6 +14,7 @@ TIMEOUT = 10
 
 
 def latest_version(pkg):
+    import requests
     r = requests.get(URL, timeout=TIMEOUT)
     j = r.json()
     return j[pkg]
