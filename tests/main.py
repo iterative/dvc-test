@@ -13,16 +13,16 @@ URL = 'https://4ki8820rsf.execute-api.us-east-2.amazonaws.com/' \
 TIMEOUT = 10
 
 
-def latest_version(pkg):
+def latest_version(platform, pkg):
     import requests
     r = requests.get(URL, timeout=TIMEOUT)
     j = r.json()
-    return j[pkg]
+    return j[platform][pkg]
 
 
-def install_latest_version(cmd, pkg):
+def install_latest_version(platform, cmd, pkg):
     import wget
-    latest = latest_version(pkg)
+    latest = latest_version(platform, pkg)
     fname = wget.download(latest)
     ret = os.system("{} {}".format(cmd, fname))
     assert ret == 0
@@ -38,7 +38,7 @@ def install_deb():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
-    install_latest_version('dpkg -i', 'deb')
+    install_latest_version('linux', 'dpkg -i', 'deb')
 
 
 def install_rpm():
@@ -46,12 +46,12 @@ def install_rpm():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
-    install_latest_version('rpm -ivh', 'rpm')
+    install_latest_version('linux', 'rpm -ivh', 'rpm')
 
 
 def install_pkg():
     assert platform.system() == "Darwin"
-    install_latest_version('installer -target / -pkg', 'pkg')
+    install_latest_version('osx', 'installer -target / -pkg', 'pkg')
 
 def install_exe():
     assert platform.system() == "Windows"
