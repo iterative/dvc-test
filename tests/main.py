@@ -34,7 +34,7 @@ def install_pip():
 
 
 def install_deb():
-    import dist
+    import distro
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
@@ -42,7 +42,7 @@ def install_deb():
 
 
 def install_rpm():
-    import dist
+    import distro
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
