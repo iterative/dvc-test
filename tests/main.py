@@ -1,5 +1,4 @@
 import os
-import wget
 import requests
 import platform
 from subprocess import check_call
@@ -22,6 +21,7 @@ def latest_version(pkg):
 
 
 def install_latest_version(cmd, pkg):
+    import wget
     latest = latest_version(pkg)
     fname = wget.download(latest)
     ret = os.system("{} {}".format(cmd, fname))
