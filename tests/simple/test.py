@@ -1,17 +1,38 @@
 import os
-from unittest import TestCase
+import filecmp
+from tests import TestDir, TestGit, TestDvc
 
 
-class TestHelp(TestCase):
+DIR = os.path.dirname(os.path.normpath(__file__))
+
+
+class TestHelpDir(TestDir):
     def test(self):
         ret = os.system("dvc --help")
         self.assertEqual(ret, 0)
 
 
-class TestTensorflow(TestCase):
+class TestHelpGit(TestGit):
     def test(self):
-        ret = os.system("python -c 'import tensorflow'")
+        ret = os.system("dvc --help")
         self.assertEqual(ret, 0)
 
-        ret = os.system("dvc run python -c 'import tensorflow'")
+
+class TestHelpDvc(TestDvc):
+    def test(self):
+        ret = os.system("dvc --help")
         self.assertEqual(ret, 0)
+
+
+class TestEnviron(TestDvc):
+    def test(self):
+        path = os.path.join(DIR, 'environ.py')
+        cmd = "python {} ".format(path)
+
+        ret = os.system(cmd + '1.json')
+        self.assertEqual(ret, 0)
+
+        ret = os.system("dvc run " + cmd + '2.json')
+        self.assertEqual(ret, 0)
+
+        self.assertTrue(filecmp.cmp('1.json', '2.json', shallow=False))
