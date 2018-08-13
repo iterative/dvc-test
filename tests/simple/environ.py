@@ -8,4 +8,5 @@ with open(sys.argv[1], 'w+') as fd:
     d = dict(os.environ)
     if 'SHLVL' in d:
         del d['SHLVL']
+    print(str(d))
     json.dump(d, fd, sort_keys=True)
