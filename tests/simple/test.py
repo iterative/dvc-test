@@ -26,6 +26,8 @@ class TestHelpDvc(TestDvc):
 
 class TestEnviron(TestDvc):
     def test(self):
+        import json
+
         path = os.path.join(DIR, 'environ.py')
         cmd = "python {} ".format(path)
 
@@ -35,4 +37,13 @@ class TestEnviron(TestDvc):
         ret = os.system("dvc run " + cmd + '2.json')
         self.assertEqual(ret, 0)
 
-        self.assertTrue(filecmp.cmp('1.json', '2.json', shallow=False))
+        with open('1.json', 'r') as fobj:
+            env1 = json.load(fobj)
+
+        with open('2.json', 'r') as fobj:
+            env2 = json.load(fobj)
+
+        # NOTE: making sure that we didn't corrupt any env. It is normal for
+        # env2 to have additional vars though.
+        diff = list(set(env1.keys()) - set(env2.keys()))
+        self.assertEqual(diff, [])
