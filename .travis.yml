@@ -127,9 +127,8 @@ matrix:
 
 before_install:
   - if  [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew install openssl;
       eval "$(pyenv init -)";
-      PYTHON_CONFIGURE_OPTS="--enable-framework" CFLAGS="-I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv install --skip-existing --keep "$PYTHON_VER";
+      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install --skip-existing --keep --verbose "$PYTHON_VER";
       pyenv shell "$PYTHON_VER";
     fi
   - which python
