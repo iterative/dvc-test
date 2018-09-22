@@ -80,7 +80,6 @@ matrix:
     os: osx
     osx_image: xcode9.3
     language: ruby
-    rvm: 2.4.0
     env:
       - PYTHON_VER=2.7.10
       - PYENV_ROOT="$HOME/.pyenv"
@@ -92,7 +91,6 @@ matrix:
     os: osx
     osx_image: xcode9.3
     language: ruby
-    rvm: 2.4.0
     env:
       - PYTHON_VER=2.7.10
       - PYENV_ROOT="$HOME/.pyenv"
@@ -104,7 +102,6 @@ matrix:
     os: osx
     osx_image: xcode8.3
     language: ruby
-    rvm: 2.4.0
     env:
       - PYTHON_VER=2.7.10
       - PYENV_ROOT="$HOME/.pyenv"
@@ -116,7 +113,6 @@ matrix:
     os: osx
     osx_image: xcode8
     language: ruby
-    rvm: 2.4.0
     env:
       - PYTHON_VER=2.7.10
       - PYENV_ROOT="$HOME/.pyenv"
@@ -127,6 +123,8 @@ matrix:
 
 before_install:
   - if  [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+      rvm use 2.4.0 --install --binary --fuzzy
       eval "$(pyenv init -)";
       PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install --skip-existing --keep --verbose "$PYTHON_VER";
       pyenv shell "$PYTHON_VER";
