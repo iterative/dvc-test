@@ -123,12 +123,12 @@ matrix:
 
 before_install:
   - if  [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update;
-      rvm use 2.4.0 --install --binary --fuzzy;
-      brew install pyenv;
-      eval "$(pyenv init -)";
-      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install --skip-existing --keep "$PYTHON_VER";
-      pyenv shell "$PYTHON_VER";
+      brew update &&
+      rvm use 2.4.0 --install --binary --fuzzy &&
+      brew install pyenv &&
+      eval "$(pyenv init -)" &&
+      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install --skip-existing --keep "$PYTHON_VER" &&
+      pyenv shell "$PYTHON_VER"
     fi
   - which python
   - which pip
