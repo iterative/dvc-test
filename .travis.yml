@@ -88,9 +88,45 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pip
-  - name: "pkg on MacOS"
+  - name: "pkg on MacOS 10.13"
     os: osx
     osx_image: xcode9.3
+    language: ruby
+    rvm: 2.4.0
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pkg
+  - name: "pkg on MacOS 10.12"
+    os: osx
+    osx_image: xcode8.3
+    language: ruby
+    rvm: 2.4.0
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pkg
+  - name: "pkg on MacOS 10.11"
+    os: osx
+    osx_image: xcode8
+    language: ruby
+    rvm: 2.4.0
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pkg
+  - name: "pkg on MacOS 10.9"
+    os: osx
+    osx_image: xcode6.4
     language: ruby
     rvm: 2.4.0
     env:
