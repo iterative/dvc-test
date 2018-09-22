@@ -112,6 +112,8 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pkg
+      - CPPFLAGS="-I/usr/local/opt/openssl/include $CPPFLAGS"
+      - LDFLAGS="-L/usr/local/opt/openssl/lib $LDFLAGS"
   - name: "pkg on MacOS 10.11"
     os: osx
     osx_image: xcode8
