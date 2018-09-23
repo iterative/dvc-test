@@ -58,6 +58,19 @@ def install_pkg():
     assert platform.system() == "Darwin"
     install_latest_version('osx', 'sudo installer -target / -pkg', 'pkg')
 
+
+def install_formula():
+    assert platform.system() == "Darwin"
+    ret = os.system("brew install iterative/homebrew-dvc/dvc")
+    assert ret == 0
+
+
+def install_cask():
+    assert platform.system() == "Darwin"
+    ret = os.system("brew cask install iterative/homebrew-dvc/dvc")
+    assert ret == 0
+
+
 def install_exe():
     assert platform.system() == "Windows"
     raise NotImplementedError
@@ -74,6 +87,10 @@ def install():
         install_rpm()
     elif pkg == "pkg":
         install_pkg()
+    elif pkg == "formula":
+        install_formula()
+    elif pkg == "cask":
+        install_cask()
     elif pkg == "exe":
         install_exe()
     else:

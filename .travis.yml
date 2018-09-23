@@ -76,7 +76,7 @@ matrix:
       - DVC_TEST_DISTRO=fedora
       - DVC_TEST_DISTRO_VERSION=26
       - DVC_TEST_PKG=rpm
-  - name: "pip on MacOS"
+  - name: "pip on MacOS 10.13"
     os: osx
     osx_image: xcode9.3
     language: ruby
@@ -98,6 +98,39 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pkg
+  - name: "formula on MacOS 10.13"
+    os: osx
+    osx_image: xcode9.3
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=formula
+  - name: "cask on MacOS 10.13"
+    os: osx
+    osx_image: xcode9.3
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=cask
+  - name: "pip on MacOS 10.12"
+    os: osx
+    osx_image: xcode8.3
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pip
   - name: "pkg on MacOS 10.12"
     os: osx
     osx_image: xcode8.3
@@ -109,6 +142,39 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pkg
+  - name: "formula on MacOS 10.12"
+    os: osx
+    osx_image: xcode8.3
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=formula
+  - name: "cask on MacOS 10.12"
+    os: osx
+    osx_image: xcode8.3
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=cask
+  - name: "pip on MacOS 10.11"
+    os: osx
+    osx_image: xcode8
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=pip
   - name: "pkg on MacOS 10.11"
     os: osx
     osx_image: xcode8
@@ -120,6 +186,28 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pkg
+  - name: "formula on MacOS 10.11"
+    os: osx
+    osx_image: xcode8
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=formula
+  - name: "cask on MacOS 10.11"
+    os: osx
+    osx_image: xcode8
+    language: ruby
+    env:
+      - PYTHON_VER=2.7.10
+      - PYENV_ROOT="$HOME/.pyenv"
+      - PATH="$PYENV_ROOT/bin:$PATH"
+      - DVC_TEST_OS=posix
+      - DVC_TEST_SYSTEM=osx
+      - DVC_TEST_PKG=cask
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
