@@ -7,6 +7,7 @@ class TestStartup(TestDir):
         import timeit
 
         start = timeit.default_timer()
-        os.system('dvc')
+        ret = os.system('dvc --help')
+        self.assertEqual(ret, 0)
         t = timeit.default_timer() - start
-        self.assertLess(t, 0.2)
+        self.assertLess(t, 0.1)
