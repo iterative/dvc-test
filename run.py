@@ -22,7 +22,7 @@ elif test_system == 'linux':
     test_distro_version = os.getenv('DVC_TEST_DISTRO_VERSION', None)
     if test_distro_version is None:
         print("Use DVC_TEST_DISTRO_VERSION to specify test distro version")
-        exit1(1)
+        exit(1)
 
     test_pkg = os.getenv('DVC_TEST_PKG', None)
     if test_pkg is None:

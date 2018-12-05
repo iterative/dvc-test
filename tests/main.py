@@ -22,8 +22,11 @@ def latest_version(platform, pkg):
 
 def install_latest_version(platform, cmd, pkg):
     import wget
+    import posixpath
     latest = latest_version(platform, pkg)
-    fname = wget.download(latest)
+    fname = posixpath.basename(latest)
+    if not os.path.exists(fname):
+        wget.download(latest, out=fname)
     ret = os.system("{} {}".format(cmd, fname))
     assert ret == 0
 
@@ -43,7 +46,7 @@ def install_deb():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
-    install_latest_version('linux', 'sudo dpkg -i', 'deb')
+    install_latest_version('linux', 'dpkg -i', 'deb')
 
 
 def install_rpm():
@@ -51,7 +54,7 @@ def install_rpm():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
-    install_latest_version('linux', 'sudo rpm -ivh', 'rpm')
+    install_latest_version('linux', 'rpm -ivh', 'rpm')
 
 
 def install_pkg():
