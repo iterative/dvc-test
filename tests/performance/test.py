@@ -10,4 +10,4 @@ class TestStartup(TestDir):
         ret = os.system('dvc --help')
         self.assertEqual(ret, 0)
         t = timeit.default_timer() - start
-        self.assertLess(t, 0.1)
+        self.assertLess(t, 0.2)
