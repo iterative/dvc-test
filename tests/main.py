@@ -8,8 +8,7 @@ except:
     from pip._internal import main as pipmain
 
 
-URL = 'https://4ki8820rsf.execute-api.us-east-2.amazonaws.com/' \
-      'prod/latest-version'
+URL = 'https://updater.dvc.org'
 TIMEOUT = 10
 RETRIES = 3
 
