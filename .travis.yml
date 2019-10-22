@@ -131,8 +131,8 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="/c/Python37:/c/Python37/Scripts:$PATH"; fi
   - which python
   - which pip
-  - pip install --upgrade pip setuptools wheel
-  - pip install -r requirements.txt
+  - travis_retry pip install --upgrade pip setuptools wheel
+  - travis_retry pip install -r requirements.txt
     
 script:
   - python run.py
