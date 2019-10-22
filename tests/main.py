@@ -2,11 +2,6 @@ import os
 import platform
 from subprocess import check_call
 
-try:
-    from pip import main as pipmain
-except:
-    from pip._internal import main as pipmain
-
 
 URL = 'https://updater.dvc.org'
 TIMEOUT = 10
@@ -33,7 +28,7 @@ def install_latest_version(platform, cmd, pkg):
 def install_pip():
     retries = RETRIES
     while retries > 0:
-        ret = pipmain(['install', 'dvc'])
+        ret = os.system("pip install dvc")
         if ret == 0:
             break
         retries -= 1
