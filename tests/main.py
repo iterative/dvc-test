@@ -112,4 +112,6 @@ def main(argv=None):
     else:
         raise Exception("Unsupported test system {}".format(system))
 
-    check_call("nosetests -v --processes=-1 --process-timeout=200", shell=True)
+    check_call(
+        "py.test -v -n=4 --timeout=600 --timeout_method=thread", shell=True
+    )
