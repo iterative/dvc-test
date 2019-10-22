@@ -6,6 +6,7 @@ services:
 matrix:
   include:
   - name: "pip on Windows"
+    os: windows
     env:
       - DVC_TEST_OS=nt
       - DVC_TEST_SYSTEM=windows

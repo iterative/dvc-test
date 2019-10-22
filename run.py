@@ -68,7 +68,6 @@ elif test_system == 'osx':
     assert platform.system() == "Darwin"
     main()
 elif test_system == 'windows':
-    print(platform.system())
     assert platform.system() == "Windows"
     main()
 else:
