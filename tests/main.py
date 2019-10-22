@@ -58,16 +58,12 @@ def install_pkg():
 
 def install_formula():
     assert platform.system() == "Darwin"
-    ret = os.system("brew update")
-    assert ret == 0
     ret = os.system("brew install iterative/homebrew-dvc/dvc")
     assert ret == 0
 
 
 def install_cask():
     assert platform.system() == "Darwin"
-    ret = os.system("brew update")
-    assert ret == 0
     ret = os.system("brew cask install iterative/homebrew-dvc/dvc")
     assert ret == 0
 

@@ -85,7 +85,7 @@ matrix:
       - DVC_TEST_PKG=rpm
   - name: "pip on MacOS 10.13"
     os: osx
-    osx_image: xcode9.4
+    osx_image: xcode10.1
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
@@ -95,7 +95,7 @@ matrix:
       - DVC_TEST_PKG=pip
   - name: "pkg on MacOS 10.13"
     os: osx
-    osx_image: xcode9.4
+    osx_image: xcode10.1
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
@@ -105,7 +105,7 @@ matrix:
       - DVC_TEST_PKG=pkg
   - name: "formula on MacOS 10.13"
     os: osx
-    osx_image: xcode9.4
+    osx_image: xcode10.1
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
@@ -115,7 +115,7 @@ matrix:
       - DVC_TEST_PKG=formula
   - name: "cask on MacOS 10.13"
     os: osx
-    osx_image: xcode9.4
+    osx_image: xcode10.1
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
