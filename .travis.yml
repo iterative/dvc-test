@@ -127,6 +127,8 @@ matrix:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s -f /usr/local/bin/python3 /usr/local/bin/python; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s -f /usr/local/bin/pip3 /usr/local/bin/pip; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install python --version 3.7.4; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH="/c/Python37:/c/Python37/Scripts:$PATH"; fi
   - which python
   - which pip
   - pip install --upgrade pip setuptools wheel
