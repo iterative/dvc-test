@@ -5,6 +5,11 @@ services:
   - docker
 matrix:
   include:
+  - name: "pip on Windows"
+    env:
+      - DVC_TEST_OS=nt
+      - DVC_TEST_SYSTEM=windows
+      - DVC_TEST_PKG=pip
   - name: "pip on Ubuntu 18.04"
     env:
       - DVC_TEST_OS=posix
