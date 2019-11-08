@@ -12,6 +12,13 @@ matrix:
       - DVC_TEST_OS=nt
       - DVC_TEST_SYSTEM=windows
       - DVC_TEST_PKG=pip
+  - name: "exe on Windows"
+    os: windows
+    language: shell
+    env:
+      - DVC_TEST_OS=nt
+      - DVC_TEST_SYSTEM=windows
+      - DVC_TEST_PKG=exe
   - name: "pip on Ubuntu 18.04"
     env:
       - DVC_TEST_OS=posix

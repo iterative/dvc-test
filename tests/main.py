@@ -21,7 +21,7 @@ def install_latest_version(platform, cmd, pkg):
     fname = posixpath.basename(latest)
     if not os.path.exists(fname):
         wget.download(latest, out=fname)
-    ret = os.system("{} {}".format(cmd, fname))
+    ret = os.system(cmd.format(fname))
     assert ret == 0
 
 
@@ -40,7 +40,7 @@ def install_deb():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
-    install_latest_version('linux', 'dpkg -i', 'deb')
+    install_latest_version('linux', 'dpkg -i {}', 'deb')
 
 
 def install_rpm():
@@ -48,12 +48,12 @@ def install_rpm():
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
-    install_latest_version('linux', 'rpm -ivh', 'rpm')
+    install_latest_version('linux', 'rpm -ivh {}', 'rpm')
 
 
 def install_pkg():
     assert platform.system() == "Darwin"
-    install_latest_version('osx', 'sudo installer -target / -pkg', 'pkg')
+    install_latest_version('osx', 'sudo installer -target / -pkg {}', 'pkg')
 
 
 def install_formula():
@@ -61,9 +61,11 @@ def install_formula():
     ret = os.system("brew install iterative/homebrew-dvc/dvc")
     assert ret == 0
 
+
 def install_exe():
     assert platform.system() == "Windows"
-    raise NotImplementedError
+    install_latest_version('windows', '{} /SILENT', 'exe')
+
 
 def install():
     pkg = os.getenv("DVC_TEST_PKG", None)
