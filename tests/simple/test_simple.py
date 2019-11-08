@@ -47,3 +47,11 @@ class TestEnviron(TestDvc):
         # env2 to have additional vars though.
         diff = list(set(env1.keys()) - set(env2.keys()))
         self.assertEqual(diff, [])
+
+
+class TestDvcAdd(TestDvc):
+    def test(self):
+        with open("foo", "w+") as fobj:
+            fobj.write("foo")
+        ret = os.system("dvc add foo")
+        self.assertEqual(ret, 0)
