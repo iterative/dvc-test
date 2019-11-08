@@ -64,6 +64,7 @@ def install_formula():
 
 def install_exe():
     assert platform.system() == "Windows"
+    print("install exe")
     install_latest_version('windows', '{} /help', 'exe')
     install_latest_version('windows', '{} /SILENT', 'exe')
 
