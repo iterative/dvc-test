@@ -64,9 +64,13 @@ def install_formula():
 
 def install_exe():
     assert platform.system() == "Windows"
-    print("install exe")
+    ret = os.system(
+        r"reg.exe ADD "
+        r"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System "
+        r"/v EnableLUA /t REG_DWORD /d 0 /f"
+    )
+    assert ret == 0
     install_latest_version('windows', '{} /SILENT', 'exe')
-    print("installed exe")
 
 
 def install():
