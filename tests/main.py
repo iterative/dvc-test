@@ -74,31 +74,12 @@ def install_exe():
         r"/v EnableLUA /t REG_DWORD /d 0 /f"
     )
     assert ret == 0
-    
-    install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES /TASKS="modifypath,addsymlinkpermissions"', 'exe')
 
-    ret = os.system(r'dir "C:\Program Files (x86)"')
-    assert ret == 0
-    
-    ret = os.system(r'dir "C:\Program Files (x86)\Data Version Control"')
-    assert ret == 0
-    
-    ret = os.system("echo %PATH%")
-    assert ret == 0
-    
-    ret = os.system("refreshenv")
-    assert ret == 0
+    install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
-    ret = os.system("echo %PATH%")
-    assert ret == 0
-
+    # NOTE: for some reason "modifypath" target from setup.iss doesn't work here,
+    # so we have to modify PATH ourselves.
     os.putenv("PATH", r"C:\Program Files (x86)\Data Version Control;" + os.getenv("PATH"))
-    
-    ret = os.system("echo %PATH%")
-    assert ret == 0
-
-    ret = os.system("dvc version")
-    assert ret == 0
 
 
 def install():
