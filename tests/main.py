@@ -75,7 +75,7 @@ def install_exe():
     )
     assert ret == 0
     
-    install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
+    install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES /TASKS="modifypath,addsymlinkpermissions"', 'exe')
 
     ret = os.system(r'dir "C:\Program Files (x86)"')
     assert ret == 0
