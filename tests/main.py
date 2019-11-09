@@ -76,9 +76,8 @@ def install_exe():
     ret = os.system("refreshenv")
     assert ret == 0
 
-    ret = os.system(r"C:\Program Files (x86)\Data Version Control\dvc.exe version")
-    assert ret == 0
-    
+    os.putenv("PATH", r"C:\Program Files (x86)\Data Version Control" + os.getenv("PATH"))
+
     ret = os.system("dvc version")
     assert ret == 0
     
