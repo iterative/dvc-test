@@ -21,7 +21,9 @@ def install_latest_version(platform, cmd, pkg):
     fname = posixpath.basename(latest)
     if not os.path.exists(fname):
         wget.download(latest, out=fname)
-    ret = os.system(cmd.format(fname))
+    cmd = cmd.format(fname)
+    print("Running {}".format(cmd))
+    ret = os.system(cmd)
     assert ret == 0
 
 
