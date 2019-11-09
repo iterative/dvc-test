@@ -77,7 +77,7 @@ def install_exe():
     
     install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
-    ret = os.system(r"dir C:\Program Files (x86)")
+    ret = os.system(r'dir "C:\Program Files (x86)"')
     assert ret == 0
     
     ret = os.system(r'dir "C:\Program Files (x86)\Data Version Control"')
