@@ -70,7 +70,7 @@ def install_exe():
         r"/v EnableLUA /t REG_DWORD /d 0 /f"
     )
     assert ret == 0
-    install_latest_version('windows', '{} /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
+    install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
 
 def install():
