@@ -73,6 +73,8 @@ def install_exe():
     )
     assert ret == 0
     
+    install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
+
     ret = os.system("refreshenv")
     assert ret == 0
 
@@ -80,8 +82,6 @@ def install_exe():
 
     ret = os.system("dvc version")
     assert ret == 0
-    
-    install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
 
 def install():
