@@ -64,14 +64,24 @@ def install_formula():
 
 def install_exe():
     assert platform.system() == "Windows"
+    
+    # Disable UAC
     ret = os.system(
         r"reg.exe ADD "
         r"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System "
         r"/v EnableLUA /t REG_DWORD /d 0 /f"
     )
     assert ret == 0
+    
     ret = os.system("refreshenv")
     assert ret == 0
+
+    ret = os.system(r"C:\Program Files (x86)\Data Version Control\dvc.exe version")
+    assert ret == 0
+    
+    ret = os.system("dvc version")
+    assert ret == 0
+    
     install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
 
