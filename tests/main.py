@@ -73,12 +73,15 @@ def install_exe():
     )
     assert ret == 0
     
-    install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
+    install_latest_version('windows', '{} /SP- /VERYSILENT /SUPPRESSMSGBOXES /DIR C:\\DVC', 'exe')
 
     ret = os.system("refreshenv")
     assert ret == 0
 
-    os.putenv("PATH", r"C:\Program Files (x86)\Data Version Control:" + os.getenv("PATH"))
+    os.putenv("PATH", r"C:\DVC:" + os.getenv("PATH"))
+    
+    ret = os.system("C:\\DVC\\dvc version")
+    assert ret == 0
 
     ret = os.system("dvc version")
     assert ret == 0
