@@ -77,7 +77,13 @@ def install_exe():
     
     install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
 
+    ret = os.system("echo %PATH%")
+    assert ret == 0
+    
     ret = os.system("refreshenv")
+    assert ret == 0
+
+    ret = os.system("echo %PATH%")
     assert ret == 0
 
     ret = os.system("dvc version")
