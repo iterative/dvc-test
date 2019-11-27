@@ -55,3 +55,7 @@ class TestDvcAdd(TestDvc):
             fobj.write("foo")
         ret = os.system("dvc add foo")
         self.assertEqual(ret, 0)
+
+    def test_failed(self):
+        ret = os.system("dvc add non-existing")
+        self.assertNotEqual(ret, 0)
