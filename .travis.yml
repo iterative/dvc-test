@@ -90,9 +90,9 @@ matrix:
       - DVC_TEST_DISTRO=fedora
       - DVC_TEST_DISTRO_VERSION=26
       - DVC_TEST_PKG=rpm
-  - name: "pip on MacOS 10.13"
+  - name: "pip on MacOS 10.14"
     os: osx
-    osx_image: xcode10.1
+    osx_image: xcode11.3
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
@@ -100,9 +100,9 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pip
-  - name: "pkg on MacOS 10.13"
+  - name: "pkg on MacOS 10.14"
     os: osx
-    osx_image: xcode10.1
+    osx_image: xcode11.3
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
@@ -110,9 +110,9 @@ matrix:
       - DVC_TEST_OS=posix
       - DVC_TEST_SYSTEM=osx
       - DVC_TEST_PKG=pkg
-  - name: "formula on MacOS 10.13"
+  - name: "formula on MacOS 10.14"
     os: osx
-    osx_image: xcode10.1
+    osx_image: xcode11.3
     language: ruby
     env:
       - PYENV_ROOT="$HOME/.pyenv"
