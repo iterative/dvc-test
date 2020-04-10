@@ -41,7 +41,7 @@ def install_pip():
     version = latest_version()
     retries = RETRIES
     while retries > 0:
-        ret = os.system("pip install dvc=={}".format(version))
+        ret = os.system("pip3 install dvc=={}".format(version))
         if ret == 0:
             break
         retries -= 1
