@@ -5,3 +5,4 @@ wget
 requests
 distro
 gitpython
+pre-commit
