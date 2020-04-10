@@ -121,7 +121,7 @@ def install():
 
 
 def main(argv=None):
-    ret = os.system("pip install -r requirements.txt")
+    ret = os.system("pip3 install -r requirements.txt")
     assert ret == 0
 
     system = os.getenv("DVC_TEST_SYSTEM", None)
