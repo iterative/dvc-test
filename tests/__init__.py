@@ -17,7 +17,7 @@ class TestDir(TestCase):
         if len(dname) > 0 and not os.path.isdir(dname):
             os.makedirs(dname)
 
-        with open(name, 'a') as f:
+        with open(name, "a") as f:
             f.write(contents)
 
     def setUp(self):
@@ -31,6 +31,7 @@ class TestDir(TestCase):
 class TestGit(TestDir):
     def setUp(self):
         from git import Repo
+
         super(TestGit, self).setUp()
         self.git = Repo.init()
 
@@ -40,4 +41,4 @@ class TestDvc(TestGit):
         super(TestDvc, self).setUp()
         ret = os.system("dvc init")
         self.assertEqual(ret, 0)
-        self.git.index.commit('add code')
+        self.git.index.commit("add code")

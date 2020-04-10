@@ -9,30 +9,29 @@ REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 RETRIES = 3
 
-test_system = os.getenv('DVC_TEST_SYSTEM', None)
+test_system = os.getenv("DVC_TEST_SYSTEM", None)
 if test_system is None:
     print("Use DVC_TEST_SYSTEM to specify test system")
     exit(1)
-elif test_system == 'linux':
-    test_distro = os.getenv('DVC_TEST_DISTRO', None)
+elif test_system == "linux":
+    test_distro = os.getenv("DVC_TEST_DISTRO", None)
     if test_distro is None:
         print("Use DVC_TEST_DISTRO to specify test distro")
         exit(1)
 
-    test_distro_version = os.getenv('DVC_TEST_DISTRO_VERSION', None)
+    test_distro_version = os.getenv("DVC_TEST_DISTRO_VERSION", None)
     if test_distro_version is None:
         print("Use DVC_TEST_DISTRO_VERSION to specify test distro version")
         exit(1)
 
-    test_pkg = os.getenv('DVC_TEST_PKG', None)
+    test_pkg = os.getenv("DVC_TEST_PKG", None)
     if test_pkg is None:
         print("Use DVC_TEST_PKG to specify test pkg")
         exit(1)
 
-    docker_dir = os.path.join(REPO_ROOT,
-                              "docker",
-                              test_distro,
-                              test_distro_version)
+    docker_dir = os.path.join(
+        REPO_ROOT, "docker", test_distro, test_distro_version
+    )
 
     retries = RETRIES
     while retries > 0:
@@ -46,16 +45,16 @@ elif test_system == 'linux':
 
     retries = RETRIES
     while retries > 0:
-        cmd = "docker run " \
-               "-v {}:/dvc-test " \
-               "-w /dvc-test " \
-               "-e DVC_TEST_SYSTEM={} " \
-               "-e DVC_TEST_PKG={} " \
-               "--rm " \
-               "-t dvc-test " \
-               "python -m tests".format(REPO_ROOT,
-                                        test_system,
-                                        test_pkg)
+        cmd = (
+            "docker run "
+            "-v {}:/dvc-test "
+            "-w /dvc-test "
+            "-e DVC_TEST_SYSTEM={} "
+            "-e DVC_TEST_PKG={} "
+            "--rm "
+            "-t dvc-test "
+            "python -m tests".format(REPO_ROOT, test_system, test_pkg)
+        )
 
         print("Running 'dvc-test' image: {}".format(cmd))
         ret = os.system(cmd)
@@ -64,10 +63,10 @@ elif test_system == 'linux':
         retries -= 1
 
     exit(ret)
-elif test_system == 'osx':
+elif test_system == "osx":
     assert platform.system() == "Darwin"
     main()
-elif test_system == 'windows':
+elif test_system == "windows":
     assert platform.system() == "Windows"
     main()
 else:

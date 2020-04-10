@@ -33,17 +33,24 @@ def cd(path):
 
 
 def time_command(cmd):
-    cprint('Timing "%s": ' % cmd, 'green')
+    cprint('Timing "%s": ' % cmd, "green")
 
     # We will collect unbuffered output with timestamps to measure hang ups.
     # Python buffers output when it's redirected, so this is critical.
     output = []
-    env = {**os.environ, 'PYTHONUNBUFFERED': 'x', 'COLUMNS': str(get_cols())}
+    env = {**os.environ, "PYTHONUNBUFFERED": "x", "COLUMNS": str(get_cols())}
     start = time.monotonic()
 
     # Execute command with output redirected to pipe and unbuffered
-    proc = subprocess.Popen(cmd, bufsize=0, shell=True, env=env, cwd=_cwd,
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc = subprocess.Popen(
+        cmd,
+        bufsize=0,
+        shell=True,
+        env=env,
+        cwd=_cwd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
 
     # Collect the combined output as it goes
     while True:
@@ -62,46 +69,46 @@ def time_command(cmd):
     # Fail loudly and stop the benchmark
     if proc.returncode != 0:
         raise Exception(
-            'Command "{}" failed with code {}'.format(cmd, proc.returncode))
+            'Command "{}" failed with code {}'.format(cmd, proc.returncode)
+        )
 
     total = end - start
-    cprint('%s s' % total, 'green')
+    cprint("%s s" % total, "green")
 
     # from pprint import pprint
     # pprint(output)
 
     return {
-        'total': total,
-        'in': output[0][0] - start if output else None,
-        'out': end - output[-1][0] if output else None,
-        'sleep': silent(max)(r[0] - l[0] for l, r in pairwise(output)),
-        'output': output,
+        "total": total,
+        "in": output[0][0] - start if output else None,
+        "out": end - output[-1][0] if output else None,
+        "sleep": silent(max)(r[0] - l[0] for l, r in pairwise(output)),
+        "output": output,
     }
 
 
 def run(cmd):
-    cprint('Running "%s"' % cmd, 'blue')
+    cprint('Running "%s"' % cmd, "blue")
     subprocess.check_call(cmd, shell=True, cwd=_cwd)
-
 
 
 def scenario():
     """This is a sample scenario"""
     from generate import generate
 
-    run('rm -rf repo; mkdir repo; cd repo; git init -q; dvc init -q')
-    generate('repo/data', 200, size='1m')
+    run("rm -rf repo; mkdir repo; cd repo; git init -q; dvc init -q")
+    generate("repo/data", 200, size="1m")
     results = {}
 
-    with cd('repo'):
-        run('rm data.dvc; rm .dvc/state')
-        results['add'] = time_command('dvc add data')
-        results['commit'] = time_command('dvc commit data.dvc')
+    with cd("repo"):
+        run("rm data.dvc; rm .dvc/state")
+        results["add"] = time_command("dvc add data")
+        results["commit"] = time_command("dvc commit data.dvc")
 
-    run('rm -rf repo')
+    run("rm -rf repo")
     return results
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # print(time_command('./generate.py t1 1000 -s 1m'))
     print(scenario())

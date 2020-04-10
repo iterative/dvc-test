@@ -3,21 +3,31 @@ import platform
 from subprocess import check_call
 
 
-URL = 'https://updater.dvc.org'
+URL = "https://updater.dvc.org"
 TIMEOUT = 10
 RETRIES = 3
 
-def latest_version(platform, pkg):
+
+def latest():
     import requests
-    r = requests.get(URL, timeout=TIMEOUT)
-    j = r.json()
-    return j['packages'][platform][pkg]
+
+    req = requests.get(URL, timeout=TIMEOUT)
+    return req.json()
+
+
+def latest_version():
+    return latest()["version"]
+
+
+def latest_pkg_version(platform, pkg):
+    return latest()["packages"][platform][pkg]
 
 
 def install_latest_version(platform, cmd, pkg):
     import wget
     import posixpath
-    latest = latest_version(platform, pkg)
+
+    latest = latest_pkg_version(platform, pkg)
     fname = posixpath.basename(latest)
     if not os.path.exists(fname):
         wget.download(latest, out=fname)
@@ -28,9 +38,10 @@ def install_latest_version(platform, cmd, pkg):
 
 
 def install_pip():
+    version = latest_version()
     retries = RETRIES
     while retries > 0:
-        ret = os.system("pip install dvc")
+        ret = os.system("pip install dvc=={}".format(version))
         if ret == 0:
             break
         retries -= 1
@@ -39,23 +50,25 @@ def install_pip():
 
 def install_deb():
     import distro
+
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "ubuntu"
-    install_latest_version('linux', 'dpkg -i {}', 'deb')
+    install_latest_version("linux", "dpkg -i {}", "deb")
 
 
 def install_rpm():
     import distro
+
     assert platform.system() == "Linux"
     dist = distro.linux_distribution(full_distribution_name=False)[0]
     assert dist == "fedora"
-    install_latest_version('linux', 'rpm -ivh {}', 'rpm')
+    install_latest_version("linux", "rpm -ivh {}", "rpm")
 
 
 def install_pkg():
     assert platform.system() == "Darwin"
-    install_latest_version('osx', 'sudo installer -target / -pkg {}', 'pkg')
+    install_latest_version("osx", "sudo installer -target / -pkg {}", "pkg")
 
 
 def install_formula():
@@ -66,7 +79,7 @@ def install_formula():
 
 def install_exe():
     assert platform.system() == "Windows"
-    
+
     # Disable UAC
     ret = os.system(
         r"reg.exe ADD "
@@ -75,11 +88,16 @@ def install_exe():
     )
     assert ret == 0
 
-    install_latest_version('windows', '.\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES', 'exe')
+    install_latest_version(
+        "windows", ".\\{} /SP- /VERYSILENT /SUPPRESSMSGBOXES", "exe"
+    )
 
-    # NOTE: for some reason "modifypath" target from setup.iss doesn't work here,
-    # so we have to modify PATH ourselves.
-    os.putenv("PATH", r"C:\Program Files (x86)\Data Version Control;" + os.getenv("PATH"))
+    # NOTE: for some reason "modifypath" target from setup.iss doesn't work
+    # here, so we have to modify PATH ourselves.
+    os.putenv(
+        "PATH",
+        r"C:\Program Files (x86)\Data Version Control;" + os.getenv("PATH"),
+    )
 
 
 def install():
@@ -100,7 +118,6 @@ def install():
         install_exe()
     else:
         raise Exception("Unsupported pkg {}".format(pkg))
-
 
 
 def main(argv=None):
