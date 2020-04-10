@@ -53,7 +53,7 @@ elif test_system == "linux":
             "-e DVC_TEST_PKG={} "
             "--rm "
             "-t dvc-test "
-            "python -m tests".format(REPO_ROOT, test_system, test_pkg)
+            "python3 -m tests".format(REPO_ROOT, test_system, test_pkg)
         )
 
         print("Running 'dvc-test' image: {}".format(cmd))
