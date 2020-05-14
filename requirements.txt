@@ -6,3 +6,6 @@ requests
 distro
 gitpython
 pre-commit
+
+virtualenv==16.7.10
+asv==0.4.1
