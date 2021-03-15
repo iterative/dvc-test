@@ -1,0 +1,101 @@
+name: Tests
+on:
+  push:
+    branches: master
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-2019
+            DVC_TEST_OS: nt
+            DVC_TEST_SYSTEM: windows
+            DVC_TEST_PKG: pip
+          - os: windows-2019
+            DVC_TEST_OS: nt
+            DVC_TEST_SYSTEM: windows
+            DVC_TEST_PKG: exe
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: ubuntu
+            DVC_TEST_DISTRO_VERSION: 18.04
+            DVC_TEST_PKG: pip
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: ubuntu
+            DVC_TEST_DISTRO_VERSION: 18.04
+            DVC_TEST_PKG: deb
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: ubuntu
+            DVC_TEST_DISTRO_VERSION: 16.04
+            DVC_TEST_PKG: pip
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: ubuntu
+            DVC_TEST_DISTRO_VERSION: 16.04
+            DVC_TEST_PKG: deb
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 28
+            DVC_TEST_PKG: pip
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 28
+            DVC_TEST_PKG: rpm
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 27
+            DVC_TEST_PKG: pip
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 27
+            DVC_TEST_PKG: rpm
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 26
+            DVC_TEST_PKG: pip
+          - os: ubuntu-18.04
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: linux
+            DVC_TEST_DISTRO: fedora
+            DVC_TEST_DISTRO_VERSION: 26
+            DVC_TEST_PKG: rpm
+          - os: macos-10.15
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: osx
+            DVC_TEST_PKG: pip
+          - os: macos-10.15
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: osx
+            DVC_TEST_PKG: pkg
+          - os: macos-10.15
+            DVC_TEST_OS: posix
+            DVC_TEST_SYSTEM: osx
+            DVC_TEST_PKG: formula
+    steps:
+      - uses: actions/checkout@v2
+      - env:
+        - DVC_TEST_OS: ${{ matrix.DVC_TEST_OS }}
+        - DVC_TEST_SYSTEM: ${{ matrix.DVC_TEST_SYSTEM }}
+        - DVC_TEST_DISTRO: ${{ matrix.DVC_TEST_DISTRO }}
+        - DVC_TEST_DISTRO_VERSION: ${{ matrix.DVC_DISTRO_VERSION }}
+        - DVC_TEST_PKG: ${{ matrix.DVC_TEST_POKG }}
+      - run: python run.py
