@@ -93,6 +93,10 @@ jobs:
             DVC_TEST_PKG: formula
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2.1.4
+        with:
+          python-version: 3.8
+      - run: pip install requirements.txt
       - env:
           DVC_TEST_OS: ${{ matrix.DVC_TEST_OS }}
           DVC_TEST_SYSTEM: ${{ matrix.DVC_TEST_SYSTEM }}
