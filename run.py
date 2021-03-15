@@ -1,6 +1,7 @@
 from __future__ import print_function
 import os
 import platform
+from subprocess import check_call
 
 from tests.main import main
 
@@ -33,36 +34,20 @@ elif test_system == "linux":
         REPO_ROOT, "docker", test_distro, test_distro_version
     )
 
-    retries = RETRIES
-    while retries > 0:
-        print("Building '{}'".format(docker_dir))
-        ret = os.system("docker build -t dvc-test {}".format(docker_dir))
-        if ret == 0:
-            break
-        retries -= 1
+    print("Building '{}'".format(docker_dir))
+    check_call("docker build -t dvc-test {}".format(docker_dir), shell=True)
 
-    assert ret == 0
-
-    retries = RETRIES
-    while retries > 0:
-        cmd = (
-            "docker run "
-            "-v {}:/dvc-test "
-            "-w /dvc-test "
-            "-e DVC_TEST_SYSTEM={} "
-            "-e DVC_TEST_PKG={} "
-            "--rm "
-            "-t dvc-test "
-            "python -m tests".format(REPO_ROOT, test_system, test_pkg)
-        )
-
-        print("Running 'dvc-test' image: {}".format(cmd))
-        ret = os.system(cmd)
-        if ret == 0:
-            break
-        retries -= 1
-
-    exit(ret)
+    check_call(
+        "docker run "
+        "-v {}:/dvc-test "
+        "-w /dvc-test "
+        "-e DVC_TEST_SYSTEM={} "
+        "-e DVC_TEST_PKG={} "
+        "--rm "
+        "-t dvc-test "
+        "python -m tests".format(REPO_ROOT, test_system, test_pkg),
+        shell=True,
+    )
 elif test_system == "osx":
     assert platform.system() == "Darwin"
     main()
