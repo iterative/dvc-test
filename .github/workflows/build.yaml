@@ -34,18 +34,6 @@ jobs:
           - os: ubuntu-18.04
             DVC_TEST_OS: posix
             DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: ubuntu
-            DVC_TEST_DISTRO_VERSION: 16.04
-            DVC_TEST_PKG: pip
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: ubuntu
-            DVC_TEST_DISTRO_VERSION: 16.04
-            DVC_TEST_PKG: deb
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
             DVC_TEST_DISTRO: fedora
             DVC_TEST_DISTRO_VERSION: 28
             DVC_TEST_PKG: pip
@@ -54,30 +42,6 @@ jobs:
             DVC_TEST_SYSTEM: linux
             DVC_TEST_DISTRO: fedora
             DVC_TEST_DISTRO_VERSION: 28
-            DVC_TEST_PKG: rpm
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: fedora
-            DVC_TEST_DISTRO_VERSION: 27
-            DVC_TEST_PKG: pip
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: fedora
-            DVC_TEST_DISTRO_VERSION: 27
-            DVC_TEST_PKG: rpm
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: fedora
-            DVC_TEST_DISTRO_VERSION: 26
-            DVC_TEST_PKG: pip
-          - os: ubuntu-18.04
-            DVC_TEST_OS: posix
-            DVC_TEST_SYSTEM: linux
-            DVC_TEST_DISTRO: fedora
-            DVC_TEST_DISTRO_VERSION: 26
             DVC_TEST_PKG: rpm
           - os: macos-10.15
             DVC_TEST_OS: posix
