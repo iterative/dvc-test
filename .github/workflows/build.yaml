@@ -93,9 +93,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - env:
-        - DVC_TEST_OS: ${{ matrix.DVC_TEST_OS }}
-        - DVC_TEST_SYSTEM: ${{ matrix.DVC_TEST_SYSTEM }}
-        - DVC_TEST_DISTRO: ${{ matrix.DVC_TEST_DISTRO }}
-        - DVC_TEST_DISTRO_VERSION: ${{ matrix.DVC_DISTRO_VERSION }}
-        - DVC_TEST_PKG: ${{ matrix.DVC_TEST_POKG }}
+          DVC_TEST_OS: ${{ matrix.DVC_TEST_OS }}
+          DVC_TEST_SYSTEM: ${{ matrix.DVC_TEST_SYSTEM }}
+          DVC_TEST_DISTRO: ${{ matrix.DVC_TEST_DISTRO }}
+          DVC_TEST_DISTRO_VERSION: ${{ matrix.DVC_DISTRO_VERSION }}
+          DVC_TEST_PKG: ${{ matrix.DVC_TEST_POKG }}
       - run: python run.py
