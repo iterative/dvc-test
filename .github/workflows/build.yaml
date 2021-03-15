@@ -98,4 +98,4 @@ jobs:
           DVC_TEST_DISTRO: ${{ matrix.DVC_TEST_DISTRO }}
           DVC_TEST_DISTRO_VERSION: ${{ matrix.DVC_DISTRO_VERSION }}
           DVC_TEST_PKG: ${{ matrix.DVC_TEST_POKG }}
-      - run: python run.py
+        run: python run.py
