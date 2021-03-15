@@ -33,7 +33,7 @@ class TestEnviron(TestDvc):
         ret = os.system(cmd + "1.json")
         self.assertEqual(ret, 0)
 
-        ret = os.system("dvc run " + cmd + "2.json")
+        ret = os.system("dvc run -n two " + cmd + "2.json")
         self.assertEqual(ret, 0)
 
         with open("1.json", "r") as fobj:
