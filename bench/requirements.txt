@@ -2,4 +2,4 @@ funcy>=1.13
 msgpack==0.6.1
 tabulate==0.8.5
 termcolor==1.1.0
-tqdm==4.35.0
+tqdm==4.66.3
